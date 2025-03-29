@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Size Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <style>
+        .qr-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .qr-box {
+            text-align: center;
+            border: 1px solid #000;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>QR Code Size Test</h1>
+    <p>Print this page and test which QR code scans best.</p>
+    <div class="qr-container">
+        <script>
+            const url = "https://thedegrootfamilyducks.github.io/DuckFound/?secretDuckifyer=DvDeULPsgDKRnWOidWYdfMBWmyagnFDaxcHGqgaAYeLixWGLmf&cruiseLine=Princess%20Cruises&itinerary=One%20Way%20NonStop%20Vancouver%20To%20Los%20Angeles&ship=Sapphire%20Princess&duck=Small%20Duck";
+            const sizes = [120, 110, 100, 90, 80, 70, 60, 50, 40, 30];
+            
+            document.write('<div class="qr-container">');
+            sizes.forEach((size, index) => {
+                document.write(`
+                    <div class="qr-box">
+                        <p>${size / 10} cm × ${size / 10} cm</p>
+                        <canvas id="qr${index}"></canvas>
+                    </div>
+                `);
+            });
+            document.write('</div>');
+        </script>
+    </div>
+    <script>
+        sizes.forEach((size, index) => {
+            new QRious({ element: document.getElementById(`qr${index}`), value: url, size: size });
+        });
+    </script>
+</body>
+</html>
